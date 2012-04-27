@@ -3,24 +3,28 @@
 #include <string.h>
 #include <errno.h>
 
+int count_topbits(unsigned char n, int nbits) {
+  int c,ct=0;
+  n>>=(8-nbits);
+  for (c = nbits-1; c >= 0; c--) {
+      if ((n>>c)&1) {
+          ct++;
+      } else {
+          break;
+      }
+  }
+  return ct;
+}
+
 int get_mbseq_len (char *utf8buf)
 {
     unsigned char byte = utf8buf[0];
     int copylen = -1;
 
-    if ((byte&0xF0)==0xF0) { /* 4-byte char copy */
-        copylen = 4;
-    } else if ((byte&0xE0)==0xE0) { /* 3-byte char copy */
-        copylen = 3;
-    } else if ((byte&0xC0)==0xC0) { /* 2-byte char copy */
-        copylen = 2;
-    } else if (byte <= 0x7F) { /* single char copy */
-        copylen = 1;
-    } else {
-        printf("Uh-oh, we got a character we can't handle! Malformed UTF8?\n");
-    }
+    if (byte <= 0x7F)
+        return 1;
 
-    return copylen;
+    return count_topbits(byte, 6);
 }
 
 /* reverse a UTF-8 string without converting to Unicode code points */
