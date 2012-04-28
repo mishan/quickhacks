@@ -3,28 +3,22 @@
 #include <string.h>
 #include <errno.h>
 
-int count_topbits(unsigned char n, int nbits) {
-  int c,ct=0;
-  n>>=(8-nbits);
-  for (c = nbits-1; c >= 0; c--) {
-      if ((n>>c)&1) {
-          ct++;
-      } else {
-          break;
-      }
+int count_topbits(unsigned char n) {
+  int c = 0;
+  for (; (n>>7)&1; n<<=1) {
+      c++;
   }
-  return ct;
+  return c;
 }
 
 int get_mbseq_len (char *utf8buf)
 {
     unsigned char byte = utf8buf[0];
-    int copylen = -1;
 
     if (byte <= 0x7F)
         return 1;
 
-    return count_topbits(byte, 6);
+    return count_topbits(byte);
 }
 
 /* reverse a UTF-8 string without converting to Unicode code points */
