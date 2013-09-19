@@ -10,7 +10,9 @@ from bs4 import BeautifulSoup
 def scrapePosts(br, postLinks):
     posts = []
     for postLink in postLinks:
-        posts.append(scrapeTimelinePost(br, postLink))
+        post = scrapeTimelinePost(br, postLink)
+        posts.append(post)
+        print getPostXML(post)
         time.sleep(3)
     return posts
 
@@ -55,6 +57,23 @@ def scrapeTimelinePost(br, postURL):
     ret['date_utime'] = postUTime
 
     return ret
+
+def getPostXML(post):
+    itemXML = "<item>\n"
+    itemXML += "  <pubDate>"+post['date_fmt']+"</pubDate>\n"
+    itemXML += "  <title>"+post['date_fmt']+"</title>\n";
+    contentXML = "  <content:encoded>"
+    if post.has_key('text'):
+        contentXML += post['text']
+    if post.has_key('image'):
+        contentXML += "<br/>Image: <img src='"+post['image']+"'/>";
+    if post.has_key('link_url'):
+        contentXML += "<br/>Link: <a href='"+post['link_url']+"'>Link</a>";
+    contentXML = contentXML.replace('\n', '');
+    contentXML += "</content:encoded>\n";
+    itemXML += contentXML + "</item>\n";
+    return itemXML.encode("utf-8")
+
 
 ## Main code:
 br = mechanize.Browser()
@@ -186,12 +205,5 @@ postURLs = [
 
 posts = scrapePosts(br, postURLs)
 
-for post in posts:
-    print "Date: "+post['date_fmt']
-    if post.has_key('text'):
-        print "Text: "+post['text']
-    if post.has_key('image'):
-        print "Image: "+post['image']
-    if post.has_key('link_url'):
-        print "Link: "+post['link_url']
-    print
+#for post in posts:
+#   print getPostXML(post)
