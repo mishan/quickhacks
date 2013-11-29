@@ -18,30 +18,30 @@ var ffi = require('ffi');
 
 var libmegahal = ffi.Library('./libmegahal', {
     // These must be called before megahal_initialize()
-    'megahal_setnobanner':       [ 'void',   [ ] ],
-    'megahal_setnoprompt':       [ 'void',   [ ] ],
-    'megahal_setnowrap':         [ 'void',   [ ] ],
+    'megahal_setnobanner':      [ 'void',   [ ] ],
+    'megahal_setnoprompt':      [ 'void',   [ ] ],
+    'megahal_setnowrap':        [ 'void',   [ ] ],
     // params: filename
-    'megahal_seterrorfile':      [ 'void',   [ 'string' ] ],
+    'megahal_seterrorfile':     [ 'void',   [ 'string' ] ],
     // params: filename
-    'megahal_setstatusfile':     [ 'void',   [ 'string' ] ],
+    'megahal_setstatusfile':    [ 'void',   [ 'string' ] ],
     // params: directory
-    'megahal_setdirectory':      [ 'void',   [ 'string' ] ],
+    'megahal_setdirectory':     [ 'void',   [ 'string' ] ],
 
     // This must be called before using megahal.
-    'megahal_initialize':        [ 'void',   [ ] ],
+    'megahal_initialize':       [ 'void',   [ ] ],
 
     // Returns an initial greeting from the bot
-    'megahal_initial_greeting' : [ 'string', [ ] ],
+    'megahal_initial_greeting': [ 'string', [ ] ],
 
     // params: input, log (whether to write to megahal.txt)
     // return: reply
-    'megahal_do_reply':          [ 'string', ['string', 'int'] ],
+    'megahal_do_reply':         [ 'string', ['string', 'int'] ],
     // params: input, log (whether to write to megahal.txt)
-    'megahal_learn_no_reply':    [ 'void',   ['string', 'int'] ],
+    'megahal_learn_no_reply':   [ 'void',   ['string', 'int'] ],
 
     // This must called when done to ensure everything is saved.
-    'megahal_cleanup':           [ 'void',   [ ] ],
+    'megahal_cleanup':          [ 'void',   [ ] ],
 });
 
 function MegaHAL(optParams) {
