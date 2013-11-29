@@ -15,7 +15,7 @@
  * 675 Mass Ave, Cambridge, MA 02139, USA */
 var megahal = require('./megahal.js');
 
-var bot = new megahal.MegaHAL();
+var bot = new megahal.MegaHAL({writeLog: 0});
 bot.init();
 var stdin = process.openStdin();
 
