@@ -57,9 +57,27 @@ function MegaHAL(optParams) {
     }
 }
 
+MegaHAL.prototype.setErrorFile = function(filename) {
+    libmegahal.megahal_seterrorfile(filename);
+}
+
+MegaHAL.prototype.setStatusFile = function(filename) {
+    libmegahal.megahal_setstatusfile(filename);
+}
+
+MegaHAL.prototype.setDirectory = function(dir) {
+    libmegahal.megahal_setdirectory(dir);
+}
+
 MegaHAL.prototype.init = function() {
     libmegahal.megahal_setnobanner();
+    libmegahal.megahal_setnoprompt();
+    libmegahal.megahal_setnowrap();
     libmegahal.megahal_initialize();
+}
+
+MegaHAL.prototype.greet = function() {
+    return libmegahal.megahal_initial_greeting();
 }
 
 MegaHAL.prototype.learn = function(input) {
