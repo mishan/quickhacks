@@ -16,8 +16,6 @@
 
 var ref = require('ref');
 var ffi = require('ffi');
-// XXX for test code
-var sys = require('sys');
 
 var libmegahal = ffi.Library('./libmegahal', {
     // These must be called before megahal_initialize()
@@ -64,20 +62,4 @@ MegaHAL.prototype.cleanup = function() {
     libmegahal.megahal_cleanup();
 }
 
-
-
-module.exports = MegaHAL;
-// XXX: test code
-
-var obj = new MegaHAL();
-obj.init();
-var stdin = process.openStdin();
-
-stdin.addListener('data', function(d) {
-    if (d == "\n") {
-        obj.cleanup();
-        process.exit(0);
-    } else {
-        console.log(obj.reply(d.toString()));
-    }
-});
+module.exports.MegaHAL = MegaHAL;
