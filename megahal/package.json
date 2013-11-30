@@ -1,0 +1,19 @@
+{
+  "name": "megahal",
+  "version": "0.1.0",
+  "description": "NodeJS Wrapper for MegaHAL",
+  "main": "megahal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "keywords": [
+    "megahal",
+    "ai",
+    "chat",
+    "bot"
+  ],
+  "author": "Misha Nasledov <misha@nasledov.com>",
+  "license": "GPL v2",
+  "gypfile": true
+}
