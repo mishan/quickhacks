@@ -14,16 +14,25 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 675 Mass Ave, Cambridge, MA 02139, USA */
 var megahal = require('./megahal.js');
+var http = require('http');
+var url = require('url');
 
 var bot = new megahal.MegaHAL({writeLog: 0});
 bot.init();
-var stdin = process.openStdin();
 
-stdin.addListener('data', function(d) {
-    if (d == "\n") {
+http.createServer(function (request, response) {
+    if (request.method=='GET') {
+        var url_parts = url.parse(request.url,true);
+        var reply;
+        if (url_parts.query !== undefined && url_parts.query.q !== undefined) {
+            reply = bot.reply(url_parts.query.q);
+        } else {
+            reply = bot.greet();
+        }
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.write(JSON.stringify({'reply': reply}));
+        response.end();
         bot.save();
-        process.exit(0);
-    } else {
-        console.log(bot.reply(d.toString()));
     }
-});
+}).listen(8787);
+

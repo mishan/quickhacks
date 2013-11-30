@@ -88,7 +88,7 @@ MegaHAL.prototype.reply = function(input) {
     return libmegahal.megahal_do_reply(input, this.log);
 }
 
-MegaHAL.prototype.cleanup = function() {
+MegaHAL.prototype.save = function() {
     libmegahal.megahal_cleanup();
 }
 
