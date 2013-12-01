@@ -14,7 +14,7 @@
 
 <div id="wrapper">
     <div id="menu">
-        <p class="welcome">Welcome<b></b></p>
+        <p class="welcome">Welcome to MegaHAL Chat!<b></b></p>
         <div style="clear:both"></div>
     </div>
 
