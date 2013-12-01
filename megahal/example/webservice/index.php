@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-<script src="megahal-chat.js" />
+<script src="megahal-chat.js"></script>
 <link type="text/css" rel="stylesheet" href="style.css" />
 </head>
 
