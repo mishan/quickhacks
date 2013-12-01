@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="megahal-chat.js" />
 <link type="text/css" rel="stylesheet" href="style.css" />
 </head>
 
@@ -28,48 +29,7 @@
     </form>
 </div>
 
-<script type="text/javascript">
-     function getHALText(text) {
-         return '<font color="red">HAL: </font>'+text+'<br/><br/>';
-     }
 
-     function getUserPrefix() {
-         return '<font color="blue">User: </font>';
-     }
-
-    // jQuery Document
-    $(document).ready(function() {
-        // get greeting
-        $.get('/~misha/megahal/talk.php', {}, function(res) {
-            if (res) {
-                var resObj = $.parseJSON(res);
-                $('.chatbox').html(getHALText(resObj.reply));
-            }
-        });
-
-        $('.input-form').submit(function(e) {
-            var userMsgBox = $('.user-input');
-            var clientMsg = userMsgBox.val();
-            var chatbox = $('.chatbox');
-
-            chatbox.append(getUserPrefix(''));
-            $(document.createTextNode(clientMsg)).appendTo(chatbox);
-            chatbox.append('<br/><br/>');
-            userMsgBox.val('');
-            $.get('/~misha/megahal/talk.php?q='+encodeURIComponent(clientMsg), {}, function(res) {
-                if (res) {
-                    var resObj = $.parseJSON(res);
-                    chatbox.append(getHALText(resObj.reply));
-                }
-                chatbox.animate({
-                      scrollTop: chatbox.height()
-                }, 300);
-            });
-
-            return false;
-        });
-    });
-</script>
 <hr border=0/>
 <i>Copyright (C) 2013 Misha Nasledov</i>
 </body>
