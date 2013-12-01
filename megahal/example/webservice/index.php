@@ -29,13 +29,21 @@
 </div>
 
 <script type="text/javascript">
+     function getHALText(text) {
+         return '<font color="red">HAL: </font>'+text+'<br/><br/>';
+     }
+
+     function getUserPrefix() {
+         return '<font color="blue">User: </font>';
+     }
+
     // jQuery Document
     $(document).ready(function() {
         // get greeting
         $.get('/~misha/megahal/talk.php', {}, function(res) {
             if (res) {
                 var resObj = $.parseJSON(res);
-                $('.chatbox').html('HAL: '+resObj.reply+'<br/><br/>');
+                $('.chatbox').html(getHALText(resObj.reply));
             }
         });
 
@@ -43,23 +51,23 @@
             var userMsgBox = $('.user-input');
             var clientMsg = userMsgBox.val();
             var chatbox = $('.chatbox');
-            $(document.createTextNode('User: '+clientMsg)).appendTo(chatbox);
+
+            chatbox.append(getUserPrefix(''));
+            $(document.createTextNode(clientMsg)).appendTo(chatbox);
             chatbox.append('<br/><br/>');
             userMsgBox.val('');
-            // XXX: data param not working
             $.get('/~misha/megahal/talk.php?q='+encodeURIComponent(clientMsg), {}, function(res) {
                 if (res) {
                     var resObj = $.parseJSON(res);
-                    chatbox.append('HAL: '+resObj.reply+'<br/><br/>');
+                    chatbox.append(getHALText(resObj.reply));
                 }
                 chatbox.animate({
                       scrollTop: chatbox.height()
                 }, 300);
             });
+
             return false;
         });
-
-
     });
 </script>
 <hr border=0/>
