@@ -59,6 +59,7 @@
 
     });
 </script>
-
+<hr border=0/>
+<i>Copyright (C) 2013 Misha Nasledov</i>
 </body>
 </html>
