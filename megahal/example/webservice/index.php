@@ -12,13 +12,13 @@
 <link type="text/css" rel="stylesheet" href="style.css" />
 </head>
 
-<div id="wrapper">
-    <div id="menu">
-        <p class="welcome">Welcome to MegaHAL Chat!<b></b></p>
+<div class="megahal-wrapper">
+    <div class="megahal-menu">
+        <p class="megahal-welcome">Welcome to MegaHAL Chat!<b></b></p>
         <div style="clear:both"></div>
     </div>
 
-    <div id="chatbox" class="chatbox"></div>
+    <div class="megahal-chatbox"></div>
 
     <form class="form-inline input-form" role="form">
         <div class="form-group" style="width: 75%;">
