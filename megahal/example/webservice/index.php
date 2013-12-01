@@ -52,6 +52,9 @@
                     var resObj = $.parseJSON(res);
                     chatbox.append('HAL: '+resObj.reply+'<br/><br/>');
                 }
+                chatbox.animate({
+                      scrollTop: chatbox.height()
+                }, 300);
             });
             return false;
         });
